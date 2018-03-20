@@ -8,10 +8,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
   <!-- Site Properties -->
-  <title>iot-footballtable signup</title>
+  <title>iot-footballtable players signup</title>
 
   <!-- Stylesheets -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+
+<script>
+    function GetURLParameter(sParam)
+    {
+        var sPageURL = window.location.search.substring(1);
+        var sURLVariables = sPageURL.split('&');
+        for (var i = 0; i < sURLVariables.length; i++) 
+        {
+            var sParameterName = sURLVariables[i].split('=');
+            if (sParameterName[0] == sParam) 
+            {
+                return sParameterName[1];
+            }
+        }
+    }
+    function RedirectURL(player){
+        window.location = "signup.html?player=" + player + "&game=" + GetURLParameter("game");
+    }
+</script>
 </head>
 
 
@@ -32,7 +51,7 @@
               <div class="col-md-6">
                   <div class="form-group">
                       <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                          <button type="button" name="player-1" class="btn btn-primary btn-block" id="player-1">#1 signup</button>
+                          <a onclick="RedirectURL(1)" class="btn btn-primary btn-block">Signup</a>
                       </div>
                   </div>
               </div>
@@ -51,7 +70,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                          <button type="button" name="player-2" class="btn btn-primary btn-block" id="player-2">#2 signup</button>
+                        <a onclick="RedirectURL(2)" class="btn btn-primary btn-block">Signup</a>
                     </div>
                 </div>
             </div>

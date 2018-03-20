@@ -12,10 +12,25 @@
 
   <!-- Stylesheets -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+
+  <script>
+          function GetURLParameters(name)
+           {
+               var sPageURL = window.location.search.substring(1);
+               var sURLVariables = sPageURL.split('&');
+               for (var i = 0; i < sURLVariables.length; i++) 
+               {
+                   var sParameterName = sURLVariables[i].split('=');
+                   if (sParameterName[0] == name) 
+                   {
+                       return sParameterName[1];
+                   }
+               }
+           }</script>
 </head>
 
 
-<body>
+<body id='game-info'>
   <div class="container">
           <div class="row">
               <div class="col-md-12">
@@ -27,7 +42,7 @@
           <div class="col-lg-4">
               <div class="jumbotron jumbotron-fluid text-center">
                 <h2>Player 1</h2>
-                <strong style="font-size: 28px">Score1</strong>
+                <strong style="font-size: 28px" id='score-1'>Score1</strong>
               </div>
           </div>
           <div class="col-lg-4" >
@@ -38,13 +53,14 @@
           <div class="col-lg-4">
               <div class="jumbotron jumbotron-fluid text-center">
                 <h2>Player 2</h2>
-                <strong style="font-size: 28px">Score2</strong>
+                <strong style="font-size: 28px" id='score-2'>Score2</strong>
               </div>
           </div>
         </div>
   </div>
-<script src="js/jquery-3.2.1.slim.min.js"></script>
+  <script src="js/jquery-3.1.0.js"></script>
 <script src="js/popper.min.js" ></script>
 <script src="js/bootstrap.min.js"></script>
+<script src="js/game.js"></script>
 </body>
 </html>

@@ -1,23 +1,40 @@
 
 (function gameScopeWrapper($) {
-    function createUser(information) {
-        $.ajax({
-            method: 'POST',
-            url: _config.api.invokeUrl + '/game',
-            data: JSON.stringify({
-                Item: {
-                    email: information.email,
-                    name: information.name,
-                    twitter: information.twitter,
-                    game: information.game
-                }
-            }),
-            contentType: 'application/json',
-            success: completeRequest,
-            error: function ajaxError(jqXHR, textStatus, errorThrown) {
-                console.error('Error requesting game: ', textStatus, ', Details: ', errorThrown);
-                console.error('Response: ', jqXHR.responseText);
-                alert('An error occured when requesting your unicorn:\n' + jqXHR.responseText);
+    function createGame(data) {
+        jQuery.ajax({
+            type: 'POST',
+            url: 'https://ewvxfhniaa.execute-api.eu-west-2.amazonaws.com/dev/game',
+            async: false,
+            contentType: "application/json",  // this is the content type sent from client to server
+            cache: false,
+            data:data,
+            timeout: 5000,
+            success: function (data) {
+                alert("success");
+                console.log(data);
+                $('#gameStart').attr('action', "players_signup.html?game=" + data.replace("game:", ""))
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                   alert('error ' + textStatus + " " + errorThrown);
+            }
+        });
+    }
+
+    function loadGameInfo() {
+        var gameId = "1521561896964";
+        jQuery.ajax({
+            type: 'GET',
+            url: 'https://ewvxfhniaa.execute-api.eu-west-2.amazonaws.com/dev/game/' + gameId ,
+            async: false,
+            cache: false,
+            timeout: 5000,
+            dataType: "jsonp",
+            success: function (data) {
+                alert("success");
+                console.log(data);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                    alert('error ' + textStatus + " " + errorThrown);
             }
         });
     }
@@ -31,23 +48,21 @@
 
     // Register click handler for #request button
     $(function onDocReady() {
-        $('#request').click(handleRequestClick);
-
-        //displayUpdate('Failure');
-
-        if (!_config.api.invokeUrl) {
-            $('#noApiMessage').show();
-        }
+        $('#gameStart').submit(handleCreate);
+    });
+    $(document).ready(function() {
+        loadGameInfo();
     });
 
-    function handlePickupChanged() {
-        var requestButton = $('#request');
-        requestButton.text('Request Unicorn');
-        requestButton.prop('disabled', false);
-    }
 
-    function handleRequestClick(event) {
-        createUser(event.information);
+
+    function handleCreate(event) {
+        var gameName = $('#name').val();
+        data = JSON.stringify({
+                name: name
+        }),
+        console.log(data)
+        createGame(data);
     }
 
     function displayUpdate(text) {

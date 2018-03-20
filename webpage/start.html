@@ -12,12 +12,19 @@
 
   <!-- Stylesheets -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+  <script>
+    function GetAction()
+    {
+        console.log("IN HERE")
+        return "players_signup.html?game=" + document.getElementById('game-id').value
+    }
+</script>
 </head>
 
 
 <body>
   <div class="container">
-      <form class="form-horizontal" role="form" method="POST" action="register">
+      <form class="form-horizontal" id="gameStart" role="form" method="POST" action="return GetAction()">
           <div class="row">
               <div class="col-md-3"></div>
               <div class="col-md-6">
@@ -37,7 +44,7 @@
                                  placeholder="Game name" required autofocus>
                       </div>
                   </div>
-              </div>
+              </div>              
               <div class="col-md-3">
                   <div class="form-control-feedback">
                           <span class="text-danger align-middle">
@@ -46,6 +53,23 @@
                   </div>
               </div>
           </div>
+          <div class="hidden">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <input type="text" name="name" class="form-control" id="game-id"
+                               placeholder="###" disabled hidden>
+                    </div>
+                </div>
+            </div>              
+            <div class="col-md-3">
+                <div class="form-control-feedback">
+                        <span class="text-danger align-middle">
+                            <!-- Put name validation error messages here -->
+                        </span>
+                </div>
+            </div>
+        </div>
           <div class="row">
               <div class="col-md-3"></div>
               <div class="col-md-6">
@@ -54,8 +78,9 @@
           </div>
       </form>
   </div>
-<script src="js/jquery-3.2.1.slim.min.js"></script>
+  <script src="js/jquery-3.1.0.js"></script>
 <script src="js/popper.min.js" ></script>
 <script src="js/bootstrap.min.js"></script>
+<script src="js/game.js"></script>
 </body>
 </html>
