@@ -21,7 +21,7 @@
     }
 
     function loadGameInfo() {
-        var gameId = "1521561896964";
+        var gameId = GetURLParameters("game");
         jQuery.ajax({
             type: 'GET',
             url: 'https://ewvxfhniaa.execute-api.eu-west-2.amazonaws.com/dev/game/' + gameId ,
@@ -31,6 +31,9 @@
             dataType: "jsonp",
             success: function (data) {
                 alert("success");
+                document.getElementById('score-1').innerText = data['Item']['score_1']
+                document.getElementById('score-2').innerText = data['Item']['score_2']
+                document.getElementById('game-id').innerText = data['Item']['game_id']
                 console.log(data);
             },
             error: function (jqXHR, textStatus, errorThrown) {
@@ -51,7 +54,10 @@
         $('#gameStart').submit(handleCreate);
     });
     $(document).ready(function() {
-        loadGameInfo();
+        //console.log(document.location.href.match(/[^\/]+$/)[0]);
+        if(document.location.href.match(/[^\/]+$/)[0].startsWith("game_info.html")){
+            loadGameInfo();
+        }          
     });
 
 
